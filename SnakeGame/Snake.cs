@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
-using System.Xml.Linq;
 
 public class Snake : ISnake
 {
     private List<Point> _snakeBody = [];
-    private readonly List<Point> _bodyPart = [];
+    //private readonly List<Point> _bodyPart = [];
     private Point _head;
 
     private readonly int _initialSize = 1;
@@ -13,7 +12,7 @@ public class Snake : ISnake
     private readonly int _topIndent;
 
     public List<Point> SnakeBody { get { return _snakeBody; } }
-    public List<Point> BodyPart { get { return _bodyPart; } }
+    //public List<Point> BodyPart { get { return _bodyPart; } }
     public Point Head { get { return _head; } }
 
     public int LeftIndent { get { return _leftIndent; } }
@@ -29,7 +28,7 @@ public class Snake : ISnake
     {
         for (int i = 0; i < _initialSize; i++)
         {
-            Point bodySegment = new Point(LeftIndent + i, TopIndent);
+            Point bodySegment = new(LeftIndent + i, TopIndent);
             _snakeBody.Add(bodySegment);
         }
     }
@@ -116,15 +115,17 @@ public class Snake : ISnake
 
     public void UpdateSnakeDisplay()
     {
-        Console.Clear();
+        //Console.ForegroundColor = ConsoleColor.Green;
+        Console.BackgroundColor = ConsoleColor.Green;
 
         foreach (Point part in _snakeBody)
         {
             Console.SetCursorPosition(part.X + LeftIndent, part.Y + TopIndent);
-            Console.BackgroundColor = ConsoleColor.Green;
             Console.Write(" ");
-            Console.ResetColor();
+            Thread.Sleep(70);
         }
+
+        Console.ResetColor();
     }
 
     public void SnakeCount()
