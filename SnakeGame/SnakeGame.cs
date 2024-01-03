@@ -1,50 +1,89 @@
-﻿public class SnakeGame
+﻿using System.Drawing;
+
+public class SnakeGame
 {
     public void Run()
     {
         Console.CursorVisible = false;
 
-        Snake snake = new(6, 5);
+        Point startingPoint = new Point(5, 10);
+        int startingSize = 1;
+        Snake snake = new(startingPoint, startingSize);
 
-        Playfield.InitializeField();
-        Playfield.RenderField();
-
-        snake.Instantiate();
-        snake.UpdateSnakeDisplay();
+        snake.DrawSnake();
 
         while (true)
         {
-            if (Console.KeyAvailable)
-            {
-                var key = Console.ReadKey(true).Key;
+            var key = Console.ReadKey(true).Key;
 
-                switch (key)
-                {
-                    case ConsoleKey.A:
-                        {
-                            snake.MoveLeft();
-                            //snake.SnakeCount();
-                            break;
-                        }
-                    case ConsoleKey.D:
-                        {
-                            snake.MoveRight();
-                            //snake.SnakeCount();
-                            break;
-                        }
-                    case ConsoleKey.W:
-                        {
-                            snake.MoveTop();
-                            //snake.SnakeCount();
-                            break;
-                        }
-                    case ConsoleKey.S:
-                        {
-                            snake.MoveBottom();
-                            //snake.SnakeCount();
-                            break;
-                        }
-                }
+            switch (key)
+            {
+                case ConsoleKey.W:
+                case ConsoleKey.UpArrow:
+                    {
+                        snake.Move(Snake.Direction.Up);
+                        break;
+                    }
+                case ConsoleKey.S:
+                case ConsoleKey.DownArrow:
+                    {
+                        snake.Move(Snake.Direction.Down);
+                        break;
+                    }
+                case ConsoleKey.A:
+                case ConsoleKey.LeftArrow:
+                    {
+                        snake.Move(Snake.Direction.Left);
+                        break;
+                    }
+                case ConsoleKey.D:
+                case ConsoleKey.RightArrow:
+                    {
+                        snake.Move(Snake.Direction.Right);
+                        break;
+                    }
+            }
+        }
+
+        //Playfield.InitializeField();
+        //Playfield.RenderField();
+
+        //snake.Instantiate();
+        //snake.UpdateSnakeDisplay();
+
+        //while (true)
+        //{
+        //    if (Console.KeyAvailable)
+        //    {
+        //        var key = Console.ReadKey(true).Key;
+
+        //        switch (key)
+        //        {
+        //            case ConsoleKey.A:
+        //                {
+        //                    snake.MoveLeft();
+        //                    //snake.SnakeCount();
+        //                    break;
+        //                }
+        //            case ConsoleKey.D:
+        //                {
+        //                    snake.MoveRight();
+        //                    //snake.SnakeCount();
+        //                    break;
+        //                }
+        //            case ConsoleKey.W:
+        //                {
+        //                    snake.MoveTop();
+        //                    //snake.SnakeCount();
+        //                    break;
+        //                }
+        //            case ConsoleKey.S:
+        //                {
+        //                    snake.MoveBottom();
+        //                    //snake.SnakeCount();
+        //                    break;
+        //                }
+        //        }
 
                 //switch (key)
                 //{
@@ -111,6 +150,3 @@
                 //}
             }
         }
-
-    }
-}
