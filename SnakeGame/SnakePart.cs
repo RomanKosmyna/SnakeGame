@@ -30,7 +30,7 @@ public class SnakePart
     {
         SetCursorPosition(Position.X, Position.Y);
         ResetColor();
-        Console.BackgroundColor = ConsoleColor.Gray;
+        BackgroundColor = ConsoleColor.Gray;
         Write(Part);
     }
 }

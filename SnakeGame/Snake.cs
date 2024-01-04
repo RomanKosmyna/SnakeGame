@@ -213,16 +213,10 @@ public class Snake : ISnake
 
         _body[0] = newHead;
 
+        IsSnakeMovingOutOfPlayfieldByX();
+
         DrawSnake();
         Thread.Sleep(70);
-    }
-
-    public void GetCount()
-    {
-        foreach (var item in _body)
-        {
-            Console.WriteLine(item.Position);
-        }
     }
 
     public bool IsSnakeCollisionNotDetected()
@@ -236,5 +230,38 @@ public class Snake : ISnake
         }
         
         return true;
+    }
+
+    public void IsSnakeMovingOutOfPlayfieldByX()
+    {
+        if (Head.Position.X < 6)
+        {
+            Head.Position = new Point(Playfield.PlayField.GetLength(0) + 24, Head.Position.Y);
+        }
+
+        if (Head.Position.X > Playfield.PlayField.GetLength(0) + 24)
+        {
+            Head.Position = new Point(6, Head.Position.Y);
+        }
+    }
+
+    public bool IsSnakeMovingOutOfPlayfieldByY()
+    {
+        if (Head.Position.Y > Playfield.PlayField.GetLength(1))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void ChangeSnakePositionX()
+    {
+        Head.Position = new Point(6, Head.Position.Y);
+    }
+
+    public void ChangeSnakePositionY()
+    {
+        Head.Position = new Point(3, Head.Position.Y);
     }
 }
