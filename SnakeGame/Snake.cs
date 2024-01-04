@@ -178,7 +178,7 @@ public class Snake : ISnake
 
     public void Move(Direction direction)
     {
-        SnakePart newHead = null;
+        SnakePart? newHead = null;
 
         switch (direction)
         {
@@ -225,7 +225,7 @@ public class Snake : ISnake
         }
     }
 
-    public bool IsSnakeCollisionDetected()
+    public bool IsSnakeCollisionNotDetected()
     {
         for (int i = 1; i < _body.Length; i++)
         {

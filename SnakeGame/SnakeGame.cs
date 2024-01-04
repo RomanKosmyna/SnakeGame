@@ -6,8 +6,8 @@ public class SnakeGame
     {
         Console.CursorVisible = false;
 
-        Point startingPoint = new Point(5, 10);
-        int startingSize = 20;
+        Point startingPoint = new Point(13, 7);
+        int startingSize = 1;
         Snake snake = new(startingPoint, startingSize);
 
         Playfield playfield = new();
@@ -17,9 +17,9 @@ public class SnakeGame
 
         snake.DrawSnake();
 
-        bool isSnakeAlive = true;
+        bool gameStatus = true;
 
-        while (isSnakeAlive)
+        while (gameStatus)
         {
             var key = Console.ReadKey(true).Key;
 
@@ -29,28 +29,28 @@ public class SnakeGame
                 case ConsoleKey.UpArrow:
                     {
                         snake.Move(Snake.Direction.Up);
-                        isSnakeAlive = snake.IsSnakeCollisionDetected();
+                        gameStatus = snake.IsSnakeCollisionNotDetected();
                         break;
                     }
                 case ConsoleKey.S:
                 case ConsoleKey.DownArrow:
                     {
                         snake.Move(Snake.Direction.Down);
-                        isSnakeAlive = snake.IsSnakeCollisionDetected();
+                        gameStatus = snake.IsSnakeCollisionNotDetected();
                         break;
                     }
                 case ConsoleKey.A:
                 case ConsoleKey.LeftArrow:
                     {
                         snake.Move(Snake.Direction.Left);
-                        isSnakeAlive = snake.IsSnakeCollisionDetected();
+                        gameStatus = snake.IsSnakeCollisionNotDetected();
                         break;
                     }
                 case ConsoleKey.D:
                 case ConsoleKey.RightArrow:
                     {
                         snake.Move(Snake.Direction.Right);
-                        isSnakeAlive = snake.IsSnakeCollisionDetected();
+                        gameStatus = snake.IsSnakeCollisionNotDetected();
                         break;
                     }
             }

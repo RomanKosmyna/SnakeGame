@@ -30,14 +30,7 @@ public class SnakePart
     {
         SetCursorPosition(Position.X, Position.Y);
         ResetColor();
-
-        bool isSnakeOnField = PositionSeeker.AreCoordinatesValid(Position);
-
-        if (isSnakeOnField)
-        {
-            BackgroundColor = ConsoleColor.Gray;
-        }
-
+        Console.BackgroundColor = ConsoleColor.Gray;
         Write(Part);
     }
 }
