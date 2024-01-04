@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Linq;
 
 public class Snake : ISnake
 {
@@ -14,7 +13,7 @@ public class Snake : ISnake
 
     public List<Point> SnakeBody { get { return _snakeBody; } }
     //public List<Point> BodyPart { get { return _bodyPart; } }
-    public Point Head { get { return _head; } }
+    //public Point Head { get { return _head; } }
 
     public int LeftIndent { get { return _leftIndent; } }
     public int TopIndent { get { return _topIndent; } }
@@ -145,10 +144,12 @@ public class Snake : ISnake
     private int _startingSize;
     private Point _startingPoint;
     public string Part { get; set; }
- 
+    public SnakePart Head => _body.First();
+    public SnakePart Tail => _body.Last();
+
     public SnakePart[] Body { get {  return _body; } }
 
-    public Snake(Point startingPoint, int startingSize, string part = " ")
+    public Snake(Point startingPoint, int startingSize, string part = "  ")
     {
         _startingPoint = startingPoint;
         _startingSize = startingSize;
@@ -164,46 +165,76 @@ public class Snake : ISnake
     {
         foreach (SnakePart part in _body)
         {
-            part.DrawPart();
+            if (part == Head)
+            {
+                part.DrawHead();
+            }
+            else
+            {
+                part.DrawPart();
+            }
         }
     }
 
     public void Move(Direction direction)
     {
-        SnakePart newPart = null;
+        SnakePart newHead = null;
 
         switch (direction)
         {
             case Direction.Up:
                 {
-                    newPart = new SnakePart(Part, new Point(_body.First().Position.X, _body.First().Position.Y - 1));
+                    newHead = new SnakePart(Part, new Point(Head.Position.X, Head.Position.Y - 1));
                     break;
                 }
             case Direction.Down:
                 {
-                    newPart = new SnakePart(Part, new Point(_body.First().Position.X, _body.First().Position.Y + 1));
+                    newHead = new SnakePart(Part, new Point(Head.Position.X, Head.Position.Y + 1));
                     break;
                 }
             case Direction.Left:
                 {
-                    newPart = new SnakePart(Part, new Point(_body.First().Position.X - 1, _body.First().Position.Y));
+                    newHead = new SnakePart(Part, new Point(Head.Position.X - 1, Head.Position.Y));
                     break;
                 }
             case Direction.Right:
                 {
-                    newPart = new SnakePart(Part, new Point(_body.First().Position.X + 1, _body.First().Position.Y));
+                    newHead = new SnakePart(Part, new Point(Head.Position.X + 1, Head.Position.Y));
                     break;
                 }
         }
 
-        _body.Last().ErasePart();
+        Tail.ErasePart();
+
         for (var i = _body.Length - 1; i > 0; i--)
         {
             _body[i] = _body[i - 1];
         }
 
-        _body[0] = newPart;
+        _body[0] = newHead;
 
         DrawSnake();
+        Thread.Sleep(70);
+    }
+
+    public void GetCount()
+    {
+        foreach (var item in _body)
+        {
+            Console.WriteLine(item.Position);
+        }
+    }
+
+    public bool IsSnakeCollisionDetected()
+    {
+        for (int i = 1; i < _body.Length; i++)
+        {
+            if (Head.Position.X == _body[i].Position.X && Head.Position.Y == _body[i].Position.Y)
+            {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

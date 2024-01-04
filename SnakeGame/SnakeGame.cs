@@ -7,12 +7,19 @@ public class SnakeGame
         Console.CursorVisible = false;
 
         Point startingPoint = new Point(5, 10);
-        int startingSize = 1;
+        int startingSize = 20;
         Snake snake = new(startingPoint, startingSize);
+
+        Playfield playfield = new();
+        Playfield.RenderField();
+
+        PositionSeeker positionSeeker = new(Playfield.PlayField);
 
         snake.DrawSnake();
 
-        while (true)
+        bool isSnakeAlive = true;
+
+        while (isSnakeAlive)
         {
             var key = Console.ReadKey(true).Key;
 
@@ -22,29 +29,33 @@ public class SnakeGame
                 case ConsoleKey.UpArrow:
                     {
                         snake.Move(Snake.Direction.Up);
+                        isSnakeAlive = snake.IsSnakeCollisionDetected();
                         break;
                     }
                 case ConsoleKey.S:
                 case ConsoleKey.DownArrow:
                     {
                         snake.Move(Snake.Direction.Down);
+                        isSnakeAlive = snake.IsSnakeCollisionDetected();
                         break;
                     }
                 case ConsoleKey.A:
                 case ConsoleKey.LeftArrow:
                     {
                         snake.Move(Snake.Direction.Left);
+                        isSnakeAlive = snake.IsSnakeCollisionDetected();
                         break;
                     }
                 case ConsoleKey.D:
                 case ConsoleKey.RightArrow:
                     {
                         snake.Move(Snake.Direction.Right);
+                        isSnakeAlive = snake.IsSnakeCollisionDetected();
                         break;
                     }
             }
         }
-
+        Console.WriteLine("Game over!");
         //Playfield.InitializeField();
         //Playfield.RenderField();
 
@@ -85,68 +96,68 @@ public class SnakeGame
         //                }
         //        }
 
-                //switch (key)
-                //{
-                //    case ConsoleKey.A:
-                //        {
-                //            ConsoleKey newKey = key;
-                //            do
-                //            {
-                //                snake.MoveLeft();
-                //                if (Console.KeyAvailable)
-                //                {
-                //                    newKey = Console.ReadKey(true).Key;
-                //                }
-                //            }
-                //            while (newKey != ConsoleKey.W && newKey != ConsoleKey.D && newKey != ConsoleKey.S);
-                //            Thread.Sleep(200);
-                //            break;
-                //        }
-                //    case ConsoleKey.D:
-                //        {
-                //            ConsoleKey newKey = key;
-                //            do
-                //            {
-                //                snake.MoveRight();
-                //                if (Console.KeyAvailable)
-                //                {
-                //                    newKey = Console.ReadKey(true).Key;
-                //                }
-                //            }
-                //            while (newKey != ConsoleKey.A && newKey != ConsoleKey.W && newKey != ConsoleKey.S);
-                //            Thread.Sleep(200);
-                //            break;
-                //        }
-                //    case ConsoleKey.W:
-                //        {
-                //            ConsoleKey newKey = key;
-                //            do
-                //            {
-                //                snake.MoveTop();
-                //                if (Console.KeyAvailable)
-                //                {
-                //                    newKey = Console.ReadKey(true).Key;
-                //                }
-                //            }
-                //            while (newKey != ConsoleKey.A && newKey != ConsoleKey.D && newKey != ConsoleKey.S);
-                //            Thread.Sleep(200);
-                //            break;
-                //        }
-                //    case ConsoleKey.S:
-                //        {
-                //            ConsoleKey newKey = key;
-                //            do
-                //            {
-                //                snake.MoveBottom();
-                //                if (Console.KeyAvailable)
-                //                {
-                //                    newKey = Console.ReadKey(true).Key;
-                //                }
-                //            }
-                //            while (newKey != ConsoleKey.A && newKey != ConsoleKey.W && newKey != ConsoleKey.D);
-                //            Thread.Sleep(200);
-                //            break;
-                //        }
-                //}
-            }
+        //switch (key)
+        //{
+        //    case ConsoleKey.A:
+        //        {
+        //            ConsoleKey newKey = key;
+        //            do
+        //            {
+        //                snake.MoveLeft();
+        //                if (Console.KeyAvailable)
+        //                {
+        //                    newKey = Console.ReadKey(true).Key;
+        //                }
+        //            }
+        //            while (newKey != ConsoleKey.W && newKey != ConsoleKey.D && newKey != ConsoleKey.S);
+        //            Thread.Sleep(200);
+        //            break;
+        //        }
+        //    case ConsoleKey.D:
+        //        {
+        //            ConsoleKey newKey = key;
+        //            do
+        //            {
+        //                snake.MoveRight();
+        //                if (Console.KeyAvailable)
+        //                {
+        //                    newKey = Console.ReadKey(true).Key;
+        //                }
+        //            }
+        //            while (newKey != ConsoleKey.A && newKey != ConsoleKey.W && newKey != ConsoleKey.S);
+        //            Thread.Sleep(200);
+        //            break;
+        //        }
+        //    case ConsoleKey.W:
+        //        {
+        //            ConsoleKey newKey = key;
+        //            do
+        //            {
+        //                snake.MoveTop();
+        //                if (Console.KeyAvailable)
+        //                {
+        //                    newKey = Console.ReadKey(true).Key;
+        //                }
+        //            }
+        //            while (newKey != ConsoleKey.A && newKey != ConsoleKey.D && newKey != ConsoleKey.S);
+        //            Thread.Sleep(200);
+        //            break;
+        //        }
+        //    case ConsoleKey.S:
+        //        {
+        //            ConsoleKey newKey = key;
+        //            do
+        //            {
+        //                snake.MoveBottom();
+        //                if (Console.KeyAvailable)
+        //                {
+        //                    newKey = Console.ReadKey(true).Key;
+        //                }
+        //            }
+        //            while (newKey != ConsoleKey.A && newKey != ConsoleKey.W && newKey != ConsoleKey.D);
+        //            Thread.Sleep(200);
+        //            break;
+        //        }
+        //}
+    }
         }

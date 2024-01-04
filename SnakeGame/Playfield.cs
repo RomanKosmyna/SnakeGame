@@ -3,13 +3,14 @@
 public class Playfield
 {
     private static Point[,] _playfield = new Point[20, 40];
+    public static Point[,] PlayField => _playfield;
 
-    //public Playfield()
-    //{
-    //    _playfield = new Point[20, 40];
-    //}
+    public Playfield()
+    {
+        InitializeField();
+    }
 
-    public static void InitializeField()
+    private static void InitializeField()
     {
         for (int i = 0; i < _playfield.GetLength(0); i++)
         {
@@ -26,11 +27,9 @@ public class Playfield
         {
             for (int j = 0;  j < _playfield.GetLength(1); j++)
             {
-                {
-                    Console.SetCursorPosition(j + 6, i + 3);
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.WriteLine(" ");
-                }
+                   Console.SetCursorPosition(j + 6, i + 3);
+                   Console.BackgroundColor = ConsoleColor.Gray;
+                   Console.WriteLine(" ");
             }
 
             Console.WriteLine();

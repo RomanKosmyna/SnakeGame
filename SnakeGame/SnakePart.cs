@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using static System.Console;
+using System.Drawing;
 
 public class SnakePart
 {
@@ -13,15 +14,30 @@ public class SnakePart
 
     public void DrawPart()
     {
-        Console.SetCursorPosition(Position.X, Position.Y);
-        Console.BackgroundColor = ConsoleColor.Green;
-        Console.Write(Part);
+        SetCursorPosition(Position.X, Position.Y);
+        BackgroundColor = ConsoleColor.Green;
+        Write(Part);
+    }
+
+    public void DrawHead()
+    {
+        SetCursorPosition(Position.X, Position.Y);
+        BackgroundColor = ConsoleColor.Yellow;
+        Write(Part);
     }
 
     public void ErasePart()
     {
-        Console.SetCursorPosition(Position.X, Position.Y);
-        Console.ResetColor();
-        Console.Write(Part);
+        SetCursorPosition(Position.X, Position.Y);
+        ResetColor();
+
+        bool isSnakeOnField = PositionSeeker.AreCoordinatesValid(Position);
+
+        if (isSnakeOnField)
+        {
+            BackgroundColor = ConsoleColor.Gray;
+        }
+
+        Write(Part);
     }
 }
