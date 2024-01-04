@@ -21,20 +21,24 @@ public class SnakeGame
 
         ConsoleKey previousKey = ConsoleKey.RightArrow;
 
-        Food food = new();
+        Food food = null;
 
         while (gameStatus)
         {
-            if (food.IsActive)
+            if (food == null || food.IsEaten)
             {
-                food.SpawnFood();
-
-                food.IsActive = false;
+                food = Food.SpawnFood();
             }
 
-            if (food.Position.X == snake.Head.Position.X && food.Position.Y == snake.Head.Position.Y)
+            if (food != null)
             {
-                snake.EatFood();
+                food.DrawFood();
+            }
+
+            if (food != null && food.Position.X == snake.Head.Position.X && food.Position.Y == snake.Head.Position.Y)
+            {
+                snake.EatFood(food);
+                food = null;
             }
 
             if (Console.KeyAvailable)

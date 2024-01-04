@@ -2,41 +2,52 @@
 
 public class Food
 {
-    private bool isActive = true;
-    private static readonly string visual = " ";
-    private Point position;
+    private static bool isEaten = true;
+    private static readonly string visualView = " ";
+    private static Point position;
 
-    public bool IsActive { get => isActive; set => isActive = value; }
+    public bool IsEaten { get => isEaten; set => isEaten = value; }
     public Point Position { get => position; }
 
-    public Food()
+    private System.Timers.Timer spawnTimer;
+
+    private static Food instance;
+
+    public static Food Instance
     {
-        position = new Point(13, 14);
+        get
+        {
+            if (instance == null)
+            {
+                instance = new Food();
+            }
+            return instance;
+        }
     }
 
-    public Food FoodFactory()
+    private static Food CreateFood()
     {
+        isEaten = false;
+        int randomPositionX = new Random().Next(6, 24);
+        int randomPositionY = new Random().Next(3, 23);
+        position = new Point(randomPositionX, randomPositionY);
         return new Food();
     }
 
-    public void SpawnFood()
+    public static Food SpawnFood()
     {
-        Point[,] playfield = Playfield.PlayField;
-
-        int randomPositionX = new Random().Next(6, 24);
-        int randomPositionY = new Random().Next(3, 24);
-
-        for (int i = 0; i < playfield.GetLength(0); i++)
+        if (isEaten)
         {
-            for (int j = 0; j < playfield.GetLength(1); j++)
-            {
-                position = new Point(randomPositionX, randomPositionY);
-            }
+            return CreateFood();
         }
+        return null;
+    }
 
+    public void DrawFood()
+    {
         Console.SetCursorPosition(position.X, position.Y);
         Console.BackgroundColor = ConsoleColor.Red;
-        Console.WriteLine(visual);
+        Console.WriteLine(visualView);
         Console.ResetColor();
     }
 }

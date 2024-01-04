@@ -27,8 +27,10 @@ public class Snake : ISnake
             .ToArray();
     }
 
-    public void EatFood()
+    public void EatFood(Food food)
     {
+        food.IsEaten = true;
+
         SnakePart[] newSnake = new SnakePart[_body.Length + 1];
 
         Array.Copy(_body, newSnake, _body.Length);
