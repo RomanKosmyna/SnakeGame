@@ -13,7 +13,7 @@ public class Snake
 
     public SnakePart[] Body { get {  return _body; } }
 
-    public Snake(Point startingPoint, int startingSize, string part = "  ")
+    public Snake(Point startingPoint, int startingSize, string part = " ")
     {
         _startingPoint = startingPoint;
         _startingSize = startingSize;
@@ -42,7 +42,7 @@ public class Snake
 
     public bool IsSnakeEatingFood(Food food, Snake snake)
     {
-        if (food != null && snake.Head.Position == food.Position)
+        if (snake.Head.Position.Equals(food.Position))
         {
             return true;
         }
@@ -95,12 +95,17 @@ public class Snake
 
         Tail.ErasePart();
 
-        for (var i = _body.Length - 1; i > 0; i--)
+        SnakePart[] newBody = new SnakePart[_body.Length];
+
+        newBody[0] = newHead;
+
+        for (var i = 1; i < _body.Length; i++)
         {
-            _body[i] = _body[i - 1];
+            newBody[i] = _body[i - 1];
         }
 
-        _body[0] = newHead;
+        _body = newBody;
+
 
         IsSnakeMovingOutOfPlayfieldByX();
         IsSnakeMovingOutOfPlayfieldByY();
