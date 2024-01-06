@@ -2,6 +2,8 @@
 
 public class SnakeGame
 {
+    private Menu menu = new();
+
     public void Run()
     {
         Console.CursorVisible = false;
@@ -16,6 +18,8 @@ public class SnakeGame
         PositionSeeker positionSeeker = new(Playfield.PlayField);
 
         snake.DrawSnake();
+
+        menu.DrawMenu();
 
         bool gameStatus = true;
 
@@ -35,10 +39,11 @@ public class SnakeGame
                 food.DrawFood();
             }
 
-            if (food != null && food.Position.X == snake.Head.Position.X && food.Position.Y == snake.Head.Position.Y)
+            bool isSnakeEating = snake.IsSnakeEatingFood(food, snake);
+
+            if (isSnakeEating)
             {
                 snake.EatFood(food);
-                food = null;
             }
 
             if (Console.KeyAvailable)

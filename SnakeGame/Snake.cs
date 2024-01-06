@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Timers;
+using System.Xml.Linq;
 
 
 public class Snake : ISnake
@@ -40,6 +41,16 @@ public class Snake : ISnake
         newSnake[_body.Length] = newTailPart;
 
         _body = newSnake;
+    }
+
+    public bool IsSnakeEatingFood(Food food, Snake snake)
+    {
+        if (food != null && snake.Head.Position == food.Position)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void DrawSnake()
