@@ -9,7 +9,7 @@ public class SnakeGame
         Console.CursorVisible = false;
 
         Point startingPoint = new Point(13, 7);
-        int startingSize = 1;
+        int startingSize = 10;
         Snake snake = new(startingPoint, startingSize);
 
         Playfield playfield = new();
@@ -84,7 +84,10 @@ public class SnakeGame
             gameStatus = snake.IsSnakeCollisionNotDetected();
         }
 
-        Console.WriteLine("Game over!");
+        GameStatus.DrawGameStatus(false);
+
+        Console.ReadKey();
+        Console.SetCursorPosition(6, 22);
     }
 
     public void SetPreviousKey(ref ConsoleKey previousKey)

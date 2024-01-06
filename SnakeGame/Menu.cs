@@ -1,6 +1,6 @@
 ﻿using static System.Console;
 
-public class Menu
+public class Menu : GameStatus
 {
     private string[,] _menu = new string[10, 20];
     private readonly Scoreboard scoreboard = new();
@@ -18,6 +18,7 @@ public class Menu
     {
         DrawMenu();
         DrawScore();
+        DrawGameStatus(true);
     }
 
     protected void InstantiateMenu()
@@ -52,5 +53,6 @@ public class Menu
         BackgroundColor = ConsoleColor.Yellow;
         ForegroundColor = ConsoleColor.Red;
         WriteLine($"Score: {Scoreboard.Score}");
+        ResetColor();
     }
 }
