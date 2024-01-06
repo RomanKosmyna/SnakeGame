@@ -9,6 +9,8 @@ public class SnakeGame
     private readonly Snake snake;
     private Food food = null;
 
+    private bool gameStatus = true;
+
     public SnakeGame()
     {
         menu = new();
@@ -19,13 +21,7 @@ public class SnakeGame
     {
         Console.CursorVisible = false;
 
-        Playfield.RenderField();
-
-        snake.DrawSnake();
-
-        menu.LaunchMenu();
-
-        bool gameStatus = true;
+        LoadGameObjects();
 
         ConsoleKey previousKey = ConsoleKey.RightArrow;
 
@@ -52,33 +48,7 @@ public class SnakeGame
                 SetPreviousKey(ref previousKey);
             }
 
-            switch (previousKey)
-            {
-                case ConsoleKey.W:
-                case ConsoleKey.UpArrow:
-                    {
-                        snake.Move(Snake.Direction.Up);
-                        break;
-                    }
-                case ConsoleKey.S:
-                case ConsoleKey.DownArrow:
-                    {
-                        snake.Move(Snake.Direction.Down);
-                        break;
-                    }
-                case ConsoleKey.A:
-                case ConsoleKey.LeftArrow:
-                    {
-                        snake.Move(Snake.Direction.Left);
-                        break;
-                    }
-                case ConsoleKey.D:
-                case ConsoleKey.RightArrow:
-                    {
-                        snake.Move(Snake.Direction.Right);
-                        break;
-                    }
-            }
+            SnakeMovement(previousKey);
 
             gameStatus = snake.IsSnakeCollisionNotDetected();
         }
@@ -89,7 +59,47 @@ public class SnakeGame
         Console.SetCursorPosition(6, 22);
     }
 
-    public static void SetPreviousKey(ref ConsoleKey previousKey)
+    protected void LoadGameObjects()
+    {
+        Playfield.RenderField();
+
+        snake.DrawSnake();
+
+        menu.LaunchMenu();
+    }
+
+    protected void SnakeMovement(ConsoleKey previousKey)
+    {
+        switch (previousKey)
+        {
+            case ConsoleKey.W:
+            case ConsoleKey.UpArrow:
+                {
+                    snake.Move(Snake.Direction.Up);
+                    break;
+                }
+            case ConsoleKey.S:
+            case ConsoleKey.DownArrow:
+                {
+                    snake.Move(Snake.Direction.Down);
+                    break;
+                }
+            case ConsoleKey.A:
+            case ConsoleKey.LeftArrow:
+                {
+                    snake.Move(Snake.Direction.Left);
+                    break;
+                }
+            case ConsoleKey.D:
+            case ConsoleKey.RightArrow:
+                {
+                    snake.Move(Snake.Direction.Right);
+                    break;
+                }
+        }
+    }
+
+    protected static void SetPreviousKey(ref ConsoleKey previousKey)
     {
         var key = Console.ReadKey(true).Key;
 
