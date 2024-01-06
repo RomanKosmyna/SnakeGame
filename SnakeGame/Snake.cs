@@ -1,9 +1,6 @@
 ﻿using System.Drawing;
-using System.Timers;
-using System.Xml.Linq;
 
-
-public class Snake : ISnake
+public class Snake
 {
     public enum Direction { Up, Down, Left, Right }
 
