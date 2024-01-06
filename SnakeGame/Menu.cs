@@ -1,13 +1,26 @@
-﻿public class Menu
+﻿using static System.Console;
+
+public class Menu
 {
-    private string[,] _menu = new string[15, 30];
+    private string[,] _menu = new string[10, 20];
+    private readonly Scoreboard scoreboard = new();
+
+    public Scoreboard Scoreboard { get { return scoreboard; } }
 
     public Menu()
     {
+        scoreboard = new Scoreboard();
+
         InstantiateMenu();
     }
 
-    public void InstantiateMenu()
+    public void LaunchMenu()
+    {
+        DrawMenu();
+        DrawScore();
+    }
+
+    protected void InstantiateMenu()
     {
         for (int i = 0; i < _menu.GetLength(0); i++)
         {
@@ -18,18 +31,26 @@
         }
     }
 
-    public void DrawMenu()
+    protected void DrawMenu()
     {
         for (int i = 0; i < _menu.GetLength(0); i++)
         {
             for (int j = 0;  j < _menu.GetLength(1); j++)
             {
-                Console.SetCursorPosition(j + 56, i + 3);
-                Console.BackgroundColor = ConsoleColor.Yellow;
-                Console.Write(" ");
+                SetCursorPosition(j + 56, i + 3);
+                BackgroundColor = ConsoleColor.Yellow;
+                Write(" ");
             }
 
-            Console.WriteLine();
+            WriteLine();
         }
+    }
+
+    public void DrawScore()
+    {
+        SetCursorPosition(57, 4);
+        BackgroundColor = ConsoleColor.Yellow;
+        ForegroundColor = ConsoleColor.Red;
+        WriteLine($"Score: {Scoreboard.Score}");
     }
 }

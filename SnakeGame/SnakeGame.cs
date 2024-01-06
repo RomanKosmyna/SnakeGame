@@ -19,7 +19,7 @@ public class SnakeGame
 
         snake.DrawSnake();
 
-        menu.DrawMenu();
+        menu.LaunchMenu();
 
         bool gameStatus = true;
 
@@ -44,6 +44,8 @@ public class SnakeGame
             if (isSnakeEating)
             {
                 snake.EatFood(food);
+                menu.Scoreboard.IncrementScore();
+                menu.DrawScore();
             }
 
             if (Console.KeyAvailable)
