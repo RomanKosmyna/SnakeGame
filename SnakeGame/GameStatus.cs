@@ -6,8 +6,8 @@ public class GameStatus
     {
         string status = isSnakeAlive ? "Alive" : "Game over!";
 
-        SetCursorPosition(57, 6);
-        BackgroundColor = ConsoleColor.Yellow;
+        SetCursorPosition(52, 5);
+        //BackgroundColor = ConsoleColor.Yellow;
 
         if (isSnakeAlive)
         {
@@ -20,8 +20,8 @@ public class GameStatus
             while (!KeyAvailable)
             {
                 ForegroundColor = ConsoleColor.Red;
-                BackgroundColor = ConsoleColor.Yellow;
-                SetCursorPosition(57, 6);
+                BackgroundColor = ConsoleColor.Black;
+                SetCursorPosition(52, 5);
                 WriteLine($"Status: {status}");
                 ResetColor();
                 Thread.Sleep(500);
@@ -39,9 +39,9 @@ public class GameStatus
 
     private static void ClearLastLine()
     {
-        SetCursorPosition(57, 6);
-        BackgroundColor = ConsoleColor.Yellow;
+        SetCursorPosition(52, 5);
+        BackgroundColor = ConsoleColor.Black;
         Write(new string(' ', 18));
-        SetCursorPosition(57, 6);
+        SetCursorPosition(52, 5);
     }
 }

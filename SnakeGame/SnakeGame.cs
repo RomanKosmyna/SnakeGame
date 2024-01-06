@@ -3,13 +3,13 @@
 public class SnakeGame
 {
     private Menu menu = new();
+    private Point startingPoint = new Point(13, 7);
+    private int startingSize = 10;
 
     public void Run()
     {
         Console.CursorVisible = false;
 
-        Point startingPoint = new Point(13, 7);
-        int startingSize = 1;
         Snake snake = new(startingPoint, startingSize);
 
         Playfield playfield = new();
