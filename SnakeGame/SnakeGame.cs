@@ -9,7 +9,7 @@ public class SnakeGame
         Console.CursorVisible = false;
 
         Point startingPoint = new Point(13, 7);
-        int startingSize = 10;
+        int startingSize = 1;
         Snake snake = new(startingPoint, startingSize);
 
         Playfield playfield = new();
