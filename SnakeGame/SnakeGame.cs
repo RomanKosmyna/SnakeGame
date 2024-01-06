@@ -2,20 +2,24 @@
 
 public class SnakeGame
 {
-    private Menu menu = new();
-    private Point startingPoint = new Point(13, 7);
-    private int startingSize = 10;
+    private readonly Menu menu;
+    private readonly Point startingPoint = new(13, 7);
+    private readonly int startingSize = 1;
+    
+    private readonly Snake snake;
+    private Food food = null;
+
+    public SnakeGame()
+    {
+        menu = new();
+        snake = new(startingPoint, startingSize);
+    }
 
     public void Run()
     {
         Console.CursorVisible = false;
 
-        Snake snake = new(startingPoint, startingSize);
-
-        Playfield playfield = new();
         Playfield.RenderField();
-
-        PositionSeeker positionSeeker = new(Playfield.PlayField);
 
         snake.DrawSnake();
 
@@ -25,8 +29,6 @@ public class SnakeGame
 
         ConsoleKey previousKey = ConsoleKey.RightArrow;
 
-        Food food = null;
-
         while (gameStatus)
         {
             if (food == null || food.IsEaten)
@@ -34,10 +36,7 @@ public class SnakeGame
                 food = Food.SpawnFood();
             }
 
-            if (food != null)
-            {
-                food.DrawFood();
-            }
+            food?.DrawFood();
 
             bool isSnakeEating = snake.IsSnakeEatingFood(food, snake);
 
@@ -90,7 +89,7 @@ public class SnakeGame
         Console.SetCursorPosition(6, 22);
     }
 
-    public void SetPreviousKey(ref ConsoleKey previousKey)
+    public static void SetPreviousKey(ref ConsoleKey previousKey)
     {
         var key = Console.ReadKey(true).Key;
 
